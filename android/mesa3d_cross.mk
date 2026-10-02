@@ -252,7 +252,7 @@ $(MESON_GEN_FILES_TARGET): PREPROCESS_MESON_CONFIGS:=$(PREPROCESS_MESON_CONFIGS)
 $(MESON_GEN_FILES_TARGET): MESON_GEN_DIR:=$(MESON_GEN_DIR)
 $(MESON_GEN_FILES_TARGET): $(sort $(shell find -L $(MESA3D_TOP) -not -path '*/\.*'))
 	mkdir -p $(dir $@)
-	echo -e '#!/bin/bash -e\nexec ld.lld "$${@/-lc++/}"' > $(dir $@)/ld.lld
+	echo -e '#!/bin/bash -e\nexec $(AOSP_ABSOLUTE_PATH)/$(LLVM_PREBUILTS_PATH)/ld.lld "$${@/-lc++/}"' > $(dir $@)/ld.lld
 	chmod +x $(dir $@)/ld.lld
 	echo -e "[properties]\n"                                                                                                  \
 		"c_args = [$(foreach flag,$(call filter-c-flags,$(m-c-flags)),'$(flag)', ) \
